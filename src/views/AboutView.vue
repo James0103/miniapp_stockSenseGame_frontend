@@ -1,15 +1,9 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="min-h-screen flex items-center justify-center bg-gray-950 text-white p-6">
+    <h1 class="text-3xl font-bold">소개 페이지</h1>
   </div>
 </template>
 
 <style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
+/* Styles removed as they are replaced by Tailwind classes */
 </style>

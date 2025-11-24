@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-96 bg-gray-900 rounded-xl p-4 shadow-lg">
+  <div class="w-full h-96">
     <apexchart
       type="candlestick"
       height="100%"
@@ -10,22 +10,23 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import VueApexCharts from 'vue3-apexcharts';
+import { computed } from 'vue'
 
 const props = defineProps({
   data: {
     type: Array,
     required: true,
   },
-});
+})
 
-const series = computed(() => [{
-  data: props.data.map((item) => ({
-    x: new Date(item.date),
-    y: [item.open, item.high, item.low, item.close],
-  })),
-}]);
+const series = computed(() => [
+  {
+    data: props.data.map((item) => ({
+      x: new Date(item.date),
+      y: [item.open, item.high, item.low, item.close],
+    })),
+  },
+])
 
 const chartOptions = computed(() => ({
   chart: {
@@ -35,19 +36,24 @@ const chartOptions = computed(() => ({
       show: false,
     },
     background: 'transparent',
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
   },
   title: {
-    text: 'Stock Price History',
+    text: '주가 추이',
     align: 'left',
     style: {
-      color: '#fff',
+      color: '#1d1d1f',
+      fontSize: '18px',
+      fontWeight: '600',
     },
   },
   xaxis: {
     type: 'datetime',
     labels: {
       style: {
-        colors: '#9ca3af',
+        colors: '#86868b',
+        fontSize: '12px',
       },
     },
     axisBorder: {
@@ -56,6 +62,9 @@ const chartOptions = computed(() => ({
     axisTicks: {
       show: false,
     },
+    tooltip: {
+      enabled: false,
+    },
   },
   yaxis: {
     tooltip: {
@@ -63,25 +72,48 @@ const chartOptions = computed(() => ({
     },
     labels: {
       style: {
-        colors: '#9ca3af',
+        colors: '#86868b',
+        fontSize: '12px',
       },
       formatter: (value) => value.toFixed(2),
     },
   },
   grid: {
-    borderColor: '#374151',
-    strokeDashArray: 4,
+    borderColor: '#f5f5f7',
+    strokeDashArray: 0,
+    xaxis: {
+      lines: {
+        show: true,
+      },
+    },
+    yaxis: {
+      lines: {
+        show: true,
+      },
+    },
   },
   theme: {
-    mode: 'dark',
+    mode: 'light',
   },
   plotOptions: {
     candlestick: {
       colors: {
-        upward: '#10B981', // Green
-        downward: '#EF4444', // Red
+        upward: '#34c759', // Apple Green
+        downward: '#ff3b30', // Apple Red
+      },
+      wick: {
+        useFillColor: true,
       },
     },
   },
-}));
+  tooltip: {
+    theme: 'light',
+    style: {
+      fontSize: '12px',
+    },
+    x: {
+      format: 'yyyy년 MM월 dd일',
+    },
+  },
+}))
 </script>
